@@ -17,12 +17,12 @@ ___________________<br><br>
     <strong> Read: </strong> True
     </br>
     </strike>
-    <%= link_to "Mark as Unread", unread_path(link_id: link.id) %>
+    <button id="markAsUnread">Mark as Unread</button>
   <% else %>
     <strong> Title: </strong> <p class='linkEdit title' contenteditable="true"><%= link.title %></p>
     <strong> Url: </strong> <p class='linkEdit url' contenteditable="true"><%= link.url %></p>
     <strong> Read: </strong> False </br>
-    <%= link_to "Mark as Read", read_path(link_id: link.id) %>
+    <button id="markAsRead">Mark as Read</button>
     </br>
   <% end %>
 </div>

@@ -11,4 +11,10 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'
   get '/read', to: 'links#read'
   get '/unread', to: 'links#unread'
+
+  namespace :api, defaults: {format: "json"} do
+    namespace :v1 do
+      resources :users_links, only: [:show]
+    end
+  end
 end

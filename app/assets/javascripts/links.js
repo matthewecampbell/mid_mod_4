@@ -1,5 +1,7 @@
 $(document).ready(function(){
   updateLink();
+  markAsRead();
+  markAsUnread();
 });
 
 function updateLink(){
@@ -15,4 +17,40 @@ function updateLink(){
       type: "put"
     })
   })
+}
+
+function markAsRead(){
+  $('#link').on('click', '#markAsRead', function(){
+    var $link = $(this).closest('#link');
+    $.ajax({
+      url: '/read?link_id=' + $link.data('id'),
+      type: 'get'
+    })
+    .then(fetchLinks)
+    .fail(handleError)
+  })
+}
+
+function markAsUnread(){
+  $('#link').on('click', '#markAsUnread', function(){
+    var $link = $(this).closest('#link');
+    $.ajax({
+      url: '/read?link_id=' + $link.data('id'),
+      type: 'get'
+    })
+    .then(fetchLinks)
+    .fail(handleError)
+  })
+}
+
+function fetchLinks(){
+  $.ajax({
+    url: "api/v1/ideas.json",
+    type: "get",
+    success: function(response){
+      $ideas = response
+    }
+  }).then(collectLinks)
+  .then(renderLinks)
+  .fail(handleError)
 }

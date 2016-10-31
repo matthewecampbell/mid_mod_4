@@ -10,7 +10,18 @@
 
 <% current_user.links.each do |link| %>
   ___________________<br><br>
+  <% if link.read %> <strike>
   <strong> Title: </strong> <%= link.title %><br>
   <strong> Url: </strong> <%= link.url %><br>
-  <strong> Status: </strong> <%= link.read %> <br>
+  <strong> Read: </strong> True
+</br>
+</strike>
+  <%= link_to "Mark as Unread", unread_path(link_id: link.id) %>
+<% else %>
+<strong> Title: </strong> <%= link.title %><br>
+<strong> Url: </strong> <%= link.url %><br>
+<strong> Read: </strong> False </br>
+<%= link_to "Mark as Read", read_path(link_id: link.id) %>
+</br>
+<% end %>
 <% end %>

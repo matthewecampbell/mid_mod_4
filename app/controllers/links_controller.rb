@@ -17,6 +17,20 @@ class LinksController < ApplicationController
     end
   end
 
+  def read
+    @link = Link.find(params[:link_id])
+    @link.read = true
+    @link.save
+    render :index
+  end
+
+  def unread
+    @link = Link.find(params[:link_id])
+    @link.read = false
+    @link.save
+    render :index
+  end
+
   private
 
   def link_params

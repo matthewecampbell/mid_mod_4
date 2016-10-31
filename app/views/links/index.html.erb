@@ -7,7 +7,7 @@
 <%= form_for :link, url: '/links' do |f| %>
   <%= f.label :title, class: "text-center" %></br>
   <%= f.text_field :title, placeholder: "Enter Title" %></br>
-  <%= f.label :url, "url", class: "text-center" %></br> Links must begin with http:// or https://
+  <%= f.label :url, "url", class: "text-center" %></br> Links must begin with http:// or https://</br>
   <%= f.text_field :url, placeholder: "Enter Url" %></br></br>
   <%= f.submit "Create Link" %>
 <% end %>

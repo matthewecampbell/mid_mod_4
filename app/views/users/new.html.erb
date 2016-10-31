@@ -1,12 +1,14 @@
-<h1>Signup for URLockbox!</h1>
+<h1 class='well text-center'>Signup for URLockbox!</h1>
 
+<div class='jumbotron text-center'>
 <%= form_for :user, url: '/users' do |f| %>
   <%= f.label :email, class: "text-center" %></br>
   <%= f.text_field :email, placeholder: "Enter Email" %></br>
   <%= f.label :password, "Password", class: "text-center" %></br>
   <%= f.password_field :password, placeholder: "Enter Password" %></br>
   <%= f.label :password_confirmation, "Password confirmation", class: "text-center" %></br>
-  <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %></br>
-  <%= f.submit "Create User" %>
+  <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %></br></br>
+  <%= f.submit "Create User", class: "btn btn-primary" %>
 
 <% end %>
+</div>

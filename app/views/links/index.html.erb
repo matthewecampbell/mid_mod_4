@@ -1,12 +1,9 @@
-<h1>Create Link</h1>
+<h1 class='text-center'>Create Link</h1><br><br>
 
 
-<form id="filter-form">
-   Search: <input type="text" id="link-search">
-</form>
 
 </br>
-
+<div class='jumbotron text-center'>
 <%= form_for :link, url: '/links' do |f| %>
   <%= f.label :title, class: "text-center" %></br>
   <%= f.text_field :title, placeholder: "Enter Title" %></br>
@@ -15,7 +12,12 @@
   <%= f.submit "Create Link" %>
 <% end %>
 
-<div id="link">
+</div>
 
-
+<div class='jumbotron'>
+<form id="filter-form" class='text-center well'>
+  Search: <input type="text" id="link-search">
+</form>
+<div class='text-center' id="link">
+</div>
 </div>

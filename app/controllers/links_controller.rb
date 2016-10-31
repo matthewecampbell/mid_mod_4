@@ -31,6 +31,12 @@ class LinksController < ApplicationController
     render :index
   end
 
+  def update
+    @link = Link.find(params[:id])
+    @link.update_attributes(url: params[:url], title: params[:title])
+    render :index
+  end
+
   private
 
   def link_params

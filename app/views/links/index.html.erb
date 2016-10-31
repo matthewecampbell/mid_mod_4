@@ -9,19 +9,21 @@
 <% end %>
 
 <% current_user.links.each do |link| %>
-  ___________________<br><br>
+<div id="link" data-id=<%= link.id %>>
+___________________<br><br>
   <% if link.read %> <strike>
-  <strong> Title: </strong> <%= link.title %><br>
-  <strong> Url: </strong> <%= link.url %><br>
-  <strong> Read: </strong> True
-</br>
-</strike>
-  <%= link_to "Mark as Unread", unread_path(link_id: link.id) %>
-<% else %>
-<strong> Title: </strong> <%= link.title %><br>
-<strong> Url: </strong> <%= link.url %><br>
-<strong> Read: </strong> False </br>
-<%= link_to "Mark as Read", read_path(link_id: link.id) %>
-</br>
-<% end %>
+    <strong> Title: </strong><p class='linkEdit title' contenteditable="true"> <%= link.title %><br></p>
+    <strong> Url: </strong> <p class='linkEdit url' contenteditable="true"><%= link.url %></p>
+    <strong> Read: </strong> True
+    </br>
+    </strike>
+    <%= link_to "Mark as Unread", unread_path(link_id: link.id) %>
+  <% else %>
+    <strong> Title: </strong> <p class='linkEdit title' contenteditable="true"><%= link.title %></p>
+    <strong> Url: </strong> <p class='linkEdit url' contenteditable="true"><%= link.url %></p>
+    <strong> Read: </strong> False </br>
+    <%= link_to "Mark as Read", read_path(link_id: link.id) %>
+    </br>
+  <% end %>
+</div>
 <% end %>

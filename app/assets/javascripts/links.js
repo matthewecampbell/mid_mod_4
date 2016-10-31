@@ -4,7 +4,29 @@ $(document).ready(function(){
   markAsRead();
   markAsUnread();
   renderLinks();
+  searchLinks();
 });
+
+function searchLinks(){
+  $("#link-search").on('keyup', function(e){
+    var searchMatches = search(e.target.value)
+    var linksHtml = searchMatches.map(function(e) {
+      return createLinkHtml(e)
+    })
+    renderLinks(linksHtml)
+  })
+}
+
+function search(arg){
+  if (arg){
+    return $links.filter(function(e){
+      return e.title.toLowerCase().includes(arg.toLowerCase()) || e.url.toLowerCase().includes(arg.toLowerCase())
+    })
+  } else {
+    return $links
+  }
+}
+
 
 function updateLink(){
   $('#link').on('blur', '.linkEdit', function(){

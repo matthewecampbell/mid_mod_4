@@ -1,0 +1,16 @@
+<h1>Create Link</h1>
+
+<%= form_for :link, url: '/links' do |f| %>
+  <%= f.label :title, class: "text-center" %></br>
+  <%= f.text_field :title, placeholder: "Enter Title" %></br>
+  <%= f.label :url, "url", class: "text-center" %></br>
+  <%= f.text_field :url, placeholder: "Enter Url" %></br>
+  <%= f.submit "Create Link" %>
+<% end %>
+
+<% current_user.links.each do |link| %>
+  ___________________<br><br>
+  <strong> Title: </strong> <%= link.title %><br>
+  <strong> Url: </strong> <%= link.url %><br>
+  <strong> Status: </strong> <%= link.read %> <br>
+<% end %>

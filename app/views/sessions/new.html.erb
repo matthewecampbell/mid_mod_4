@@ -1,10 +1,14 @@
-<h3> Log in </h3>
+<h3 class='well text-center'> Log in </h3>
+
+<div class='jumbotron text-center'>
 <%= form_for :session, url: login_path do |f| %>
   <%= f.label :email, class: "text-center" %></br>
   <%= f.text_field :email, placeholder: "Enter Email" %></br>
   <%= f.label :password, "Password", class: "text-center" %></br>
-  <%= f.password_field :password, placeholder: "Enter Password" %>
-  <%= f.submit 'Log in' %>
+  <%= f.password_field :password, placeholder: "Enter Password" %></br></br>
+  <%= f.submit 'Log in', class: 'btn btn-primary' %></br>
   <% end %>
+  <br>
 Not Registered?
 <strong><%= link_to("Create an Account", new_user_path) %></strong>
+</div>

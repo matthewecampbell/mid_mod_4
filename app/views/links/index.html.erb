@@ -1,5 +1,12 @@
 <h1>Create Link</h1>
 
+
+<form id="filter-form">
+   Search: <input type="text" id="link-search">
+</form>
+
+</br>
+
 <%= form_for :link, url: '/links' do |f| %>
   <%= f.label :title, class: "text-center" %></br>
   <%= f.text_field :title, placeholder: "Enter Title" %></br>

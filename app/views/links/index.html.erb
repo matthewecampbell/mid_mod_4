@@ -4,26 +4,11 @@
   <%= f.label :title, class: "text-center" %></br>
   <%= f.text_field :title, placeholder: "Enter Title" %></br>
   <%= f.label :url, "url", class: "text-center" %></br>
-  <%= f.text_field :url, placeholder: "Enter Url" %></br>
+  <%= f.text_field :url, placeholder: "Enter Url" %></br></br>
   <%= f.submit "Create Link" %>
 <% end %>
 
-<% current_user.links.each do |link| %>
-<div id="link" data-id=<%= link.id %>>
-___________________<br><br>
-  <% if link.read %> <strike>
-    <strong> Title: </strong><p class='linkEdit title' contenteditable="true"> <%= link.title %><br></p>
-    <strong> Url: </strong> <p class='linkEdit url' contenteditable="true"><%= link.url %></p>
-    <strong> Read: </strong> True
-    </br>
-    </strike>
-    <button id="markAsUnread">Mark as Unread</button>
-  <% else %>
-    <strong> Title: </strong> <p class='linkEdit title' contenteditable="true"><%= link.title %></p>
-    <strong> Url: </strong> <p class='linkEdit url' contenteditable="true"><%= link.url %></p>
-    <strong> Read: </strong> False </br>
-    <button id="markAsRead">Mark as Read</button>
-    </br>
-  <% end %>
+<div id="link">
+
+
 </div>
-<% end %>

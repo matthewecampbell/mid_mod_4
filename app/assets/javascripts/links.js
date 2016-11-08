@@ -5,6 +5,9 @@ $(document).ready(function(){
   markAsUnread();
   renderLinks();
   searchLinks();
+  filterRead();
+  filterUnread();
+  sortAlphabetically();
 });
 
 function searchLinks(){
@@ -43,11 +46,12 @@ function updateLink(){
   })
 }
 
+
 function markAsRead(){
   $('#link').on('click', '#markAsRead', function(){
-    var $link = $(this).closest('#links');
+    var $link = $(this).closest('.links');
     $.ajax({
-      url: '/read?link_id=' + $link.data('id'),
+      url: '/read?link_id=' + $link[0].id,
       type: 'get'
     })
     .then(fetchLinks)
@@ -57,9 +61,9 @@ function markAsRead(){
 
 function markAsUnread(){
   $('#link').on('click', '#markAsUnread', function(){
-    var $link = $(this).closest('#links');
+    var $link = $(this).closest('.links');
     $.ajax({
-      url: '/unread?link_id=' + $link.data('id'),
+      url: '/unread?link_id=' + $link[0].id,
       type: 'get'
     })
     .then(fetchLinks)
@@ -80,6 +84,42 @@ function fetchLinks(){
   .fail(handleError)
 }
 
+function filterRead(){
+  $("#read_button").on('click', function(e){
+    $.ajax({
+      url: "api/v1/users_links",
+      type: "get",
+      success: function(response){
+        $links = response
+      }
+    })
+    $links = $links.map(function(e) {
+      if(e.read == false){
+        return e
+      }
+    })
+    renderLinks(collectLinks($links));
+  })
+}
+
+function filterUnread(){
+  $("#unread_button").on('click', function(e){
+    $.ajax({
+      url: "api/v1/users_links",
+      type: "get",
+      success: function(response){
+        $links = response
+      }
+    })
+    $links = $links.map(function(e) {
+      if(e.read == true){
+        return e
+      }
+    })
+    renderLinks(collectLinks($links));
+  })
+}
+
 function collectLinks( linksData ){
   return linksData.map(createLinkHtml);
 }
@@ -91,38 +131,77 @@ function renderLinks( linksData ){
 function handleError(error){console.log(error)}
 
 function createLinkHtml( data ){
-  if (data.read){
-    return $("<div id='links' data-id='"
-    + data.id
-    +"'>___________________<br><br>"
-    + "<strike>"
-    +"<strong> Title: </strong><p class='linkEdit title' contenteditable='true'>"
-    +data.title
-    + "</p>"
-    +"<strong> Url: </strong> <p class='linkEdit url' contenteditable='true'>"
-    +data.url
-    +"</p>"
-    +"<strong> Read: </strong> True"
-    +"</br>"
-    +"</strike>"
-    +"</br>"
-    +"<button id='markAsUnread'>Mark as Unread</button>"
-    +"</br>"
-    +"</div>")
-  } else{
-    return $("<div id='links' data-id='"
-    + data.id
-    +"'>___________________<br><br>"
-    +"<strong> Title: </strong> <p class='linkEdit title' contenteditable='true'>"
-    + data.title
-    +"</p>"
-    +"<strong> Url: </strong> <p class='linkEdit url' contenteditable='true'>"
-    + data.url
-    +"</p>"
-    +"<strong> Read: </strong> False </br>"
-    +"</br>"
-    +"<button id='markAsRead'>Mark as Read</button>"
-    +"</br>"
-    +"</div>")
+  if(data){
+    if (data.read){
+      return $("<div class='links' id='"
+      + data.id
+      +"'>___________________<br><br>"
+      + "<strike>"
+      +"<strong> Title: </strong><p class='linkEdit title' contenteditable='true'>"
+      +data.title
+      + "</p>"
+      +"<strong> Url: </strong> <p class='linkEdit url' contenteditable='true'>"
+      +data.url
+      +"</p>"
+      +"<strong> Read: </strong> True"
+      +"</br>"
+      +"</strike>"
+      +"</br>"
+      +"<button id='markAsUnread' class='btn btn-success'>Mark as Unread</button>"
+      +"</br>"
+      +"</div>")
+    } else{
+      return $("<div class='links' id='"
+      + data.id
+      +"'>___________________<br><br>"
+      +"<strong> Title: </strong> <p class='linkEdit title' contenteditable='true'>"
+      + data.title
+      +"</p>"
+      +"<strong> Url: </strong> <p class='linkEdit url' contenteditable='true'>"
+      + data.url
+      +"</p>"
+      +"<strong> Read: </strong> False </br>"
+      +"</br>"
+      +"<button id='markAsRead' class='btn btn-danger'>Mark as Read</button>"
+      +"</br>"
+      +"</div>")
+    }
   }
+}
+
+function compare(a, b) {
+  if (a.title < b.title)
+    return -1;
+  if (a.title > b.title)
+    return 1;
+  return 0;
+}
+
+function uncompare(a, b) {
+  if (a.title < b.title)
+    return 1;
+  if (a.title > b.title)
+    return -1;
+  return 0;
+}
+
+
+function sortAlphabetically(){
+  $('#alphabetical').on('click', function(){
+    if ($('#alphabetical').data('clicked')){
+      $(this).data('clicked', false);
+    } else {
+      $(this).data('clicked', true);
+    }
+    if ($('#sort').data('clicked' == true)){
+      var sorted = $links.sort(uncompare);
+    } else{
+      var sorted = $links.sort(compare);
+    }
+    return renderAlphabeticalLinks(collectLinks(sorted));
+  })
+}
+
+function renderAlphabeticalLinks( linksData ){
+  $("#link").html(linksData);
 }

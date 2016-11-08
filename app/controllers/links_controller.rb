@@ -10,6 +10,7 @@ class LinksController < ApplicationController
     @link.user_id = current_user.id if current_user
     if @link.save
       flash[:success] = "Link Created."
+      Link.send_link_email(link_params)
     else
       flash.now[:warning] = "Please enter a valid URL."
     end

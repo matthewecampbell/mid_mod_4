@@ -9,7 +9,7 @@
   <%= f.text_field :title, placeholder: "Enter Title" %></br>
   <%= f.label :url, "url", class: "text-center" %></br> Links must begin with http:// or https://</br>
   <%= f.text_field :url, placeholder: "Enter Url" %></br></br>
-  <%= f.submit "Create Link" %>
+  <%= f.submit "Create Link", class: "btn btn-success" %>
 <% end %>
 
 </div>
@@ -17,7 +17,12 @@
 <div class='jumbotron'>
 <form id="filter-form" class='text-center well'>
   Search: <input type="text" id="link-search">
-</form>
+</form><br>
+<div class="text-center">
+<button id="read_button" class="btn btn-primary">Sort by Read</button>
+<button id="unread_button" class="btn btn-primary">Sort by Unread</button>
+<button id="alphabetical" class="btn btn-primary">Sort Alphabetically</button>
+<div>
 <div class='text-center' id="link">
 </div>
 </div>

@@ -1,5 +1,5 @@
 class UserNotifier < ActionMailer::Base
-  default from: "do-not-reply@matturlbox.herokuapp.com"
+  default from: "A-Link-From-Matt@matturlbox.herokuapp.com"
 
   def send_link_email(email, url)
     @url  = url

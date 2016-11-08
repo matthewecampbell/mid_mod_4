@@ -1,15 +1,13 @@
 # require "rails_helper"
 #
 # RSpec.feature "User has functionalities for links", :type => :feature do
-#   scenario "Logged in user can change read status for link" do
+#   scenario "Logged in user can change read status for link", :js => true do
 #     user = User.create!(email: 'example@example.com', password: 'password')
-#     link = Link.create!(url: 'http://www.google.com', title: "google", user: user)
-#     link = Link.create!(url: 'http://www.google.com', title: "flooooble", user: user, read: true)
+#     link = user.links.create!(url: 'http://google.com', title: "google")
+#     link = user.links.create!(url: 'http://google.com', title: "flooooble", read: true)
 #     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 #
 #     visit '/links'
-#
-#     save_and_open_page
 #
 #     expect(page).to have_content("google")
 #     expect(page).to have_content("False")

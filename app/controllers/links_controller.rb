@@ -12,7 +12,8 @@ class LinksController < ApplicationController
       flash[:success] = "Link Created."
       Link.send_link_email(link_params)
     else
-      flash.now[:warning] = "Please enter a valid URL."
+      flash[c
+        :warning] = "Please enter a valid URL."
     end
     redirect_to links_path
   end

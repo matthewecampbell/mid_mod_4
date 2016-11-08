@@ -28,7 +28,7 @@ gem 'figaro'
 gem 'faraday'
 gem 'pry'
 gem 'validate_url'
-
+gem 'selenium-webdriver'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

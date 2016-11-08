@@ -33,13 +33,13 @@ function search(arg){
 
 function updateLink(){
   $('#link').on('blur', '.linkEdit', function(){
-    var $link = $(this).parent();
+    var $link = $(this).closest('.links');
     var $linkParams = {
       title: $link.find(".title").html(),
       url: $link.find(".url").html()
     }
     $.ajax({
-      url: "/links/" + $link.data("id"),
+      url: "/links/" + $link[0].id,
       data: $linkParams,
       type: "put"
     })

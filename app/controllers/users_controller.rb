@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       flash[:success] = "Account Created."
       redirect_to links_path
     else
-      flash.now[:warning] = "Email is already used or password does not match."
+      flash[:warning] = "Email is already used or password does not match."
       render :new
     end
   end

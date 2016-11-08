@@ -52,7 +52,7 @@ function markAsRead(){
     var $link = $(this).closest('.links');
     $.ajax({
       url: '/read?link_id=' + $link[0].id,
-      type: 'get'
+      type: 'put'
     })
     .then(fetchLinks)
     .fail(handleError)
@@ -64,7 +64,7 @@ function markAsUnread(){
     var $link = $(this).closest('.links');
     $.ajax({
       url: '/unread?link_id=' + $link[0].id,
-      type: 'get'
+      type: 'put'
     })
     .then(fetchLinks)
     .fail(handleError)

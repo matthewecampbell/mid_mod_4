@@ -12,7 +12,7 @@ RSpec.describe "Can visit links route" do
     user = User.create!(email: 'example@example.com', password: 'password')
     link = Link.create!(url: 'http://www.google.com', title: "google", user: user, id: 1000)
 
-    get "/read?link_id=1000"
+    put "/read?link_id=1000"
 
     expect(response.status).to eq(200)
     expect(link.read).to eq(false)
@@ -22,7 +22,7 @@ RSpec.describe "Can visit links route" do
     user = User.create!(email: 'example@example.com', password: 'password')
     link = Link.create!(url: 'http://www.google.com', title: "google", user: user, id: 1000)
 
-    get "/unread?link_id=1000"
+    put "/unread?link_id=1000"
 
     expect(response.status).to eq(200)
     expect(link.read).to eq(false)

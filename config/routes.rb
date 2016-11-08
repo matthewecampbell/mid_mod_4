@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
-  get '/read', to: 'links#read'
-  get '/unread', to: 'links#unread'
+  put '/read', to: 'links#read'
+  put '/unread', to: 'links#unread'
 
   namespace :api, defaults: {format: "json"} do
     namespace :v1 do

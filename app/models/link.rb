@@ -1,7 +1,7 @@
 require 'uri'
 
 class Link < ActiveRecord::Base
-  before_validation :valid_link?
+  before_validation :check_if_link_is_valid
 
   belongs_to :user
 
@@ -10,7 +10,7 @@ class Link < ActiveRecord::Base
 
   # validates :url, :url => true
 
-  def valid_link?
+  def check_if_link_is_valid
     uri = URI.parse(self.url.split(" ")[0])
     self.url = uri
     if !%w( http https ).include?(uri.scheme)

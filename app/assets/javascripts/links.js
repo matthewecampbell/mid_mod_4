@@ -94,7 +94,7 @@ function filterRead(){
       }
     })
     $links = $links.map(function(e) {
-      if(e.read == false){
+      if(e.read == true){
         return e
       }
     })
@@ -112,7 +112,7 @@ function filterUnread(){
       }
     })
     $links = $links.map(function(e) {
-      if(e.read == true){
+      if(e.read == false){
         return e
       }
     })

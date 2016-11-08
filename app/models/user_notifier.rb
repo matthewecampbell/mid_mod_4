@@ -3,7 +3,6 @@ class UserNotifier < ActionMailer::Base
 
   def send_link_email(email, url)
     @url  = url
-    binding.pry
     mail(to: email, subject: "Someone wanted to send you a URL!")
   end
 end
